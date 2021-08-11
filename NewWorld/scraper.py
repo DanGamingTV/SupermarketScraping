@@ -55,6 +55,8 @@ def getProductPrice(productId, storeId):
       cents =  str(soup.find_all('span', {'class': "fs-price-lockup__cents"}))
       dollars =  str(soup.find_all('span', {'class': "fs-price-lockup__dollars"}))
       productName = str(soup.find_all('h1', {'class': "u-h4 u-color-dark-grey"})[0].contents[0])
+      productImageURL = "https://a.fsimg.co.nz/product/retail/fan/image/master/" + productId.replace("ea_000", "") + ".png"
+      productDescription = soup.find_all('div', {'class': "fs-product-detail__description"})[0].text.strip()
       ppl = soup.find_all('div', {'class': 'fs-product-card__price-by-weight'})
       pplValid = False
       if (len(ppl) > 0):
@@ -85,7 +87,7 @@ def getProductPrice(productId, storeId):
           else:
             salePrice = "0.00"
         
-      price = {'name': productName, 'bestPrice': salePrice ,'price': salePrice}
+      price = {'productData': {'name': productName, 'productId': productId, 'productShopPage': 'https://www.paknsave.co.nz/shop/product/'+productId+productPrefix,'productImageURL': productImageURL, 'productDescription': productDescription}, 'bestPrice': salePrice ,'price': salePrice}
       if (ppl > 0):
           price['pricePerLitre'] = ppl
           price['bestPricePerLitre'] = ppl
@@ -105,16 +107,18 @@ def getProductPrice(productId, storeId):
 
 
 # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
+#productsToCheck = ["5011153_ea_000"]
 productsToCheck = ["5011153_ea_000", "5009490_ea_000", "5007647_ea_000", "5107264_ea_000", "5004703_ea_000", "5210048_ea_000", "5210061_ea_000", "5007441_ea_000", "5011173_ea_000"]
 dataList = []
-
 stores_stuff = getStores()
 
 for a in productsToCheck:
     for x in stores_stuff:
         currentPrice = getProductPrice(a, x['id'])
         storeModified = {'id': x['id'], 'name': x['name'], 'address': x['address']}
-        dataList.append({'priceData': currentPrice, 'store': storeModified})
+        productData = currentPrice['productData']
+        del currentPrice['productData']
+        dataList.append({'productData': productData, 'priceData': currentPrice, 'store': storeModified})
         print(currentPrice, x['name'])
 if (os.path.isfile('./data/latest.json')):
     with open('./data/latest.json') as json_file:
