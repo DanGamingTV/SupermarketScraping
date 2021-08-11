@@ -57,8 +57,12 @@ def getProductPrice(productId, storeId):
       productName = str(soup.find_all('h1', {'class': "u-h4 u-color-dark-grey"})[0].contents[0])
       productImageURL = "https://a.fsimg.co.nz/product/retail/fan/image/master/" + productId.replace("ea_000", "") + ".png"
       productDescription = soup.find_all('div', {'class': "fs-product-detail__description"})[0].text.strip()
-      volumeText = soup.find_all('div', {'class': 'fs-accordion__accesible-panel'})[1].find('p').text
-      volumeData = list(re.findall("Serving.pack: (\d{1,}) Serving size: (.{1,})", volumeText)[0])
+      volumeText = soup.find_all('div', {'class': 'fs-accordion__accesible-panel'})
+      if (len(volumeText) > 0):
+          volumeText = volumeText[1].find('p').text
+          volumeData = list(re.findall("Serving.pack: (\d{1,}) Serving size: (.{1,})", volumeText)[0])
+      else:
+          volumeData = ['', '']
       ppl = soup.find_all('div', {'class': 'fs-product-card__price-by-weight'})
       pplValid = False
       if (len(ppl) > 0):
