@@ -27,6 +27,8 @@ def getProductPrice(productId):
       productName = str(soup.find_all('h1', {'class': "h4 product-name"})[0].contents[0])
       centsprice =re.findall(cents_pattern, cents)
       dollarsprice = re.findall(dollars_pattern, dollars)
+      multipack_detect = re.match("(.{1,})(\d{3,}ml).(\d{1,}) Pack", productName)
+      volume_detect = re.match("(.{1,})(\d{3,}ml)", productName)
       if (len(dollarsprice) > 0):
           if (len(centsprice) > 0):
               salePrice = f"{dollarsprice[0]}.{centsprice[0]}"
@@ -41,19 +43,25 @@ def getProductPrice(productId):
           else:
             salePrice = "0.00"
         
-      price = {'name': productName, 'bestPrice': salePrice ,'price': salePrice}
-      
+      price = {'productData': {'name': productName}, 'bestPrice': salePrice ,'price': salePrice}
+      if (multipack_detect):
+          price['productData']['multipack'] = {'quantity': multipack_detect.groups()[2]}
+          price['productData']['volume'] = multipack_detect.groups()[1]
+      elif (volume_detect):
+          price['productData']['volume'] = volume_detect.groups()[1]
       return price
-
+      
 
 # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
-productsToCheck = ["R2229714"]
+productsToCheck = ["R2229714", "R2229714", "R1648759", "R2607462", "R2391372", "R2426919", "R2481578", "R2456984", "R2456983", "R2560028", "R1573117", "R1539597", "R2739987", "R1573116", "R151415", "R500135", "R2226500", "R671491", "R2657178", "R1445715", "R671492", "R1233239", "R2739986", "R2657177", "R2391373", "R2457274", "R2197289", "R2457276"]
 dataList = []
 
 for a in productsToCheck:
       currentPrice = getProductPrice(a)
-      dataList.append({'priceData': currentPrice})
-      print(currentPrice)
+      productData = currentPrice['productData']
+      del currentPrice['productData']
+      dataList.append({'productData': productData, 'priceData': currentPrice})
+      print({'productData': productData, 'priceData': currentPrice})
 
 if (os.path.isfile('./data/latest.json')):
     with open('./data/latest.json') as json_file:

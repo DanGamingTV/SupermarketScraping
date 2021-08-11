@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 import re
 import json
 import time
+import os.path
 
 dollars_pattern = '>([0-9][0-9]?)'
 cents_pattern = '>([0-9][0-9])'
@@ -24,13 +25,26 @@ def getProductPrice(productId):
       # print(r.content)
       data = json.loads(r.content)
       # print(data)
-      price = {'name': data['name'],'bestPrice': data['price']['salePrice'] ,'price': data['price']['salePrice'], 'pricePerLitre': data['size']['cupPrice']*10, 'bestPricePerLitre': data['size']['cupPrice']*10}
+      price = {'productData': {'name': data['name']},'bestPrice': data['price']['salePrice'] ,'price': data['price']['salePrice'], 'pricePerLitre': data['size']['cupPrice']*10, 'bestPricePerLitre': data['size']['cupPrice']*10}
       for x in data['productTags']:
         if(x['tagType'] == "IsGreatPriceMultiBuy"):
             price['multiBuy'] = {'quantity': x['multiBuy']['quantity'], 'value': x['multiBuy']['value'], 'perUnit': x['multiBuy']['value']/x['multiBuy']['quantity']}
             price['bestPrice'] = x['multiBuy']['value']/x['multiBuy']['quantity']
             price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
-      
+      if (data['size']['packageType'] != "single can"):
+        matchMultipack = re.match("(\d{1,})pk", data['size']['volumeSize'])
+        if(matchMultipack):
+          price['productData']['multiPack'] = {'quantity': list(matchMultipack.groups())[0]}
+          matchPackageType = re.match("(.{1,}ml) cans", data['size']['packageType'])
+          if (matchPackageType):
+            price['productData']['volume'] = list(matchPackageType.groups())[0]
+      matchVolumeSize = re.match("(.{1,}ml)", data['size']['volumeSize'])
+      if (matchVolumeSize != None):
+        price['productData']['volume'] = list(matchVolumeSize.groups())[0]
+      price['productData']['sku'] = data['sku']
+      matchVolumeFromProductName = re.findall(". (\d{1,}ml)", data['name'])
+      if (len(matchVolumeFromProductName) > 0):
+        price['productData']['volume'] = matchVolumeFromProductName[0]
       return price
 
 
@@ -42,9 +56,22 @@ dataList = []
 
 for a in productsToCheck:
       currentPrice = getProductPrice(a)
-      dataList.append({'priceData': currentPrice})
+      productData = currentPrice['productData']
+      del currentPrice['productData']
+      dataList.append({'productData': productData, 'priceData': currentPrice})
       print(currentPrice)
-with open('./data/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
-    json.dump(dataList, f, ensure_ascii=False, indent=4)
-with open('./data/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
-    json.dump(dataList, f, ensure_ascii=False, indent=4)
+if (os.path.isfile('./data/latest.json')):
+    with open('./data/latest.json') as json_file:
+        data = json.load(json_file)
+        if (dataList == data):
+            print("latest data saved is the same as the data just gathered. not going to write new file.")
+        else:
+            with open('./data/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+                json.dump(dataList, f, ensure_ascii=False, indent=4)
+            with open('./data/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
+                json.dump(dataList, f, ensure_ascii=False, indent=4)
+else:
+    with open('./data/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+        json.dump(dataList, f, ensure_ascii=False, indent=4)
+    with open('./data/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
+        json.dump(dataList, f, ensure_ascii=False, indent=4)

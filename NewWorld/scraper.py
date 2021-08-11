@@ -57,6 +57,8 @@ def getProductPrice(productId, storeId):
       productName = str(soup.find_all('h1', {'class': "u-h4 u-color-dark-grey"})[0].contents[0])
       productImageURL = "https://a.fsimg.co.nz/product/retail/fan/image/master/" + productId.replace("ea_000", "") + ".png"
       productDescription = soup.find_all('div', {'class': "fs-product-detail__description"})[0].text.strip()
+      volumeText = soup.find_all('div', {'class': 'fs-accordion__accesible-panel'})[1].find('p').text
+      volumeData = list(re.findall("Serving.pack: (\d{1,}) Serving size: (.{1,})", volumeText)[0])
       ppl = soup.find_all('div', {'class': 'fs-product-card__price-by-weight'})
       pplValid = False
       if (len(ppl) > 0):
@@ -87,7 +89,7 @@ def getProductPrice(productId, storeId):
           else:
             salePrice = "0.00"
         
-      price = {'productData': {'name': productName, 'productId': productId, 'productShopPage': 'https://www.paknsave.co.nz/shop/product/'+productId+productPrefix,'productImageURL': productImageURL, 'productDescription': productDescription}, 'bestPrice': salePrice ,'price': salePrice}
+      price = {'productData': {'name': productName, 'productId': productId, 'productShopPage': 'https://www.paknsave.co.nz/shop/product/'+productId+productPrefix,'productImageURL': productImageURL, 'productDescription': productDescription, 'volume': volumeData[1], 'multipack': {'quantity': volumeData[0]}}, 'bestPrice': salePrice ,'price': salePrice}
       if (ppl > 0):
           price['pricePerLitre'] = ppl
           price['bestPricePerLitre'] = ppl
