@@ -25,6 +25,8 @@ def getProductPrice(productId):
       cents =  str(soup.find_all('span', {'class': "now-price-fraction"}))
       dollars =  str(soup.find_all('span', {'class': "now-price-integer"}))
       productName = str(soup.find_all('h1', {'class': "h4 product-name"})[0].contents[0])
+      productDescription = str(soup.find_all('div', {'class': "long-description"})[0].contents[0])
+      productImageURL = str(soup.find_all('img', {'class': 'product-slider-image embed-responsive-item img-fluid'})[0]['src'])
       centsprice =re.findall(cents_pattern, cents)
       dollarsprice = re.findall(dollars_pattern, dollars)
       multipack_detect = re.match("(.{1,})(\d{3,}ml).(\d{1,}) Pack", productName)
@@ -43,7 +45,7 @@ def getProductPrice(productId):
           else:
             salePrice = "0.00"
         
-      price = {'productData': {'name': productName}, 'bestPrice': salePrice ,'price': salePrice}
+      price = {'productData': {'name': productName, 'productId': productId, 'productShopPage': baseurl, 'productDescription': productDescription.strip(), 'productImageURL': productImageURL}, 'bestPrice': salePrice ,'price': salePrice}
       if (multipack_detect):
           price['productData']['multipack'] = {'quantity': multipack_detect.groups()[2]}
           price['productData']['volume'] = multipack_detect.groups()[1]

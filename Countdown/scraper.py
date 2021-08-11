@@ -25,7 +25,7 @@ def getProductPrice(productId):
       # print(r.content)
       data = json.loads(r.content)
       # print(data)
-      price = {'productData': {'name': data['name']},'bestPrice': data['price']['salePrice'] ,'price': data['price']['salePrice'], 'pricePerLitre': data['size']['cupPrice']*10, 'bestPricePerLitre': data['size']['cupPrice']*10}
+      price = {'productData': {'name': data['name'], 'productShopPage': "https://shop.countdown.co.nz/shop/productdetails?stockcode="+data['sku']},'bestPrice': data['price']['salePrice'] ,'price': data['price']['salePrice'], 'pricePerLitre': data['size']['cupPrice']*10, 'bestPricePerLitre': data['size']['cupPrice']*10}
       for x in data['productTags']:
         if(x['tagType'] == "IsGreatPriceMultiBuy"):
             price['multiBuy'] = {'quantity': x['multiBuy']['quantity'], 'value': x['multiBuy']['value'], 'perUnit': x['multiBuy']['value']/x['multiBuy']['quantity']}
@@ -41,7 +41,14 @@ def getProductPrice(productId):
       matchVolumeSize = re.match("(.{1,}ml)", data['size']['volumeSize'])
       if (matchVolumeSize != None):
         price['productData']['volume'] = list(matchVolumeSize.groups())[0]
-      price['productData']['sku'] = data['sku']
+      price['productData']['productId'] = data['sku']
+      price['productData']['productDescription'] = data['description']
+      productImageURL = data['images']
+      if (len(productImageURL) > 0):
+        productImageURL = productImageURL[0]['big']
+      else:
+        productImageURL = ''
+      price['productData']['productImageURL'] = productImageURL
       matchVolumeFromProductName = re.findall(". (\d{1,}ml)", data['name'])
       if (len(matchVolumeFromProductName) > 0):
         price['productData']['volume'] = matchVolumeFromProductName[0]

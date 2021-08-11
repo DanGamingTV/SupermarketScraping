@@ -55,7 +55,7 @@ def getProductPrice(productId, storeId):
       cents =  str(soup.find_all('span', {'class': "fs-price-lockup__cents"}))
       dollars =  str(soup.find_all('span', {'class': "fs-price-lockup__dollars"}))
       productName = str(soup.find_all('h1', {'class': "u-h4 u-color-dark-grey"})[0].contents[0])
-      productImageURL = "https://a.fsimg.co.nz/product/retail/fan/image/master/" + productId.replace("ea_000", "") + ".png"
+      productImageURL = "https://a.fsimg.co.nz/product/retail/fan/image/master/" + productId.replace("_ea_000", "") + ".png"
       productDescription = soup.find_all('div', {'class': "fs-product-detail__description"})[0].text.strip()
       volumeText = soup.find_all('div', {'class': 'fs-accordion__accesible-panel'})
       if (len(volumeText) > 0):
