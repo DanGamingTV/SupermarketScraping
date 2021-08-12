@@ -124,7 +124,8 @@ for a in productsToCheck:
         storeModified = {'id': x['id'], 'name': x['name'], 'address': x['address']}
         productData = currentPrice['productData']
         del currentPrice['productData']
-        dataList.append({'productData': productData, 'priceData': currentPrice, 'store': storeModified})
+        if (currentPrice['price'] != '0.00'):
+            dataList.append({'productData': productData, 'priceData': currentPrice, 'store': storeModified})
         print(currentPrice, x['name'])
 if (os.path.isfile('./data/latest.json')):
     with open('./data/latest.json') as json_file:
