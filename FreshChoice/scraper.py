@@ -11,6 +11,8 @@ productPrefix = ""
 dollars_pattern = '>([0-9][0-9]?)'
 cents_pattern = '>([0-9][0-9])'
 
+PPL_pattern = "\(\$(\d{1,}.\d{1,}) (?:per ){0,}100[M-m][L-l]\)"
+
 def getStoreIDs():
     storeIDs = []
     storeListEndpoint = f"https://store.{storeURL}/api/v1/stores"
@@ -91,9 +93,15 @@ def getProductPrice(productId, storeId):
         productDescription = productDescription[0].text.strip()
     else:
         productDescription = ''
+    
       
     price = {'productData': {'name': productName, 'productId': productId, 'productShopPage': baseurl,'productImageURL': productImageURL, 'productDescription': productDescription},  'bestPrice': salePrice ,'price': salePrice}
-    
+    pricePerLitre = soup.find_all('span', {'class': 'MoreInfo__UnitPricing'})
+    if (pricePerLitre and re.match(PPL_pattern, pricePerLitre[0].text)):
+        pricePerLitre = re.match(PPL_pattern, pricePerLitre[0].text)[1]
+        # print((pricePerLitre))
+        price['pricePerLitre'] = float(pricePerLitre)*10
+        price['bestPricePerLitre'] = float(pricePerLitre)*10
     return price
 
 
@@ -114,6 +122,7 @@ productsToCheck = [
     "mother-energy-drink-black-500ml",
     "mother-energy-drink-6x250ml-cans",
     "mother-energy-drink-passion-500ml",
+    "mother-tropical-blast-500ml",
     "mother-can-energy-250ml",
     "mother-epic-swell-energy-drink-twisted-apple-500ml",
     "monster-energy-juice-mango-loco-500ml-can",
@@ -132,6 +141,7 @@ productsToCheck = [
     "v-energy-drink-skills-cans-275ml-4-pack",
     "v-guarana-energy-drink-fridge-pack-10x200ml",
     "v-blue-energy-drink-bottle-500ml",
+    "v-blue-sugarfree-energy-drink-500ml",
     "v-energy-drink-raspberry-lemonade-500ml-can",
     "v-sugarfree-energy-drink-berry-twist-350ml",
     "v-blue-energy-drink-275ml-cans-4-pack",
@@ -155,6 +165,18 @@ productsToCheck = [
     "monster-energy-4x500ml-cans",
     "monster-super-fuel-purple-passion-550ml",
     "monster-energy-pipeline-punch-500ml",
+    "live-plus-persist-500ml",
+    "live-plus-ignite-500ml",
+    "v-blue-sugarfree-energy-drink-250ml",
+    "live-plus-energy-drink-ignite-500ml",
+    "live-plus-persist-glass-355ml",
+    "live-plus-persist-250ml-6pack",
+    "live-plus-energy-drink-persist-glass-355ml",
+    "live-plus-live-ignite-energy-drink-6x250ml-cans",
+    "rockstar-original-energy-drink-500ml",
+    "rockstar-punched-energy-guava-500ml",
+    "rockstar-punched-watermelon-freeze-energy-drink-500ml",
+    "rockstar-energy-drink-xdurance-blueberry-can-500ml"
 ]
 
 

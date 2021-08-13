@@ -51,6 +51,15 @@ def getProductPrice(productId):
           price['productData']['volume'] = multipack_detect.groups()[1]
       elif (volume_detect):
           price['productData']['volume'] = volume_detect.groups()[1]
+      if ('volume' in price['productData']):
+          mutatedVolume = float(price['productData']['volume'].replace('ml', ''))
+          actualVolume = float(mutatedVolume)
+          if ('multipack' in price['productData']):
+              actualVolume = mutatedVolume*int(price['productData']['multipack']['quantity'])
+          calculatedPricePerLitre = float(price['price'])*(1000/actualVolume)
+          calculatedBestPricePerLitre = float(price['bestPrice'])*(1000/actualVolume)
+          price['pricePerLitre'] = calculatedPricePerLitre
+          price['bestPricePerLitre'] = calculatedBestPricePerLitre
       return price
       
 
