@@ -1,0 +1,541 @@
+{"paknsave": [{
+    "id": "d6d39eea-889d-4e20-923c-55cab225cf7f",
+    "name": "PAK'nSAVE Clarence St",
+    "banner": "PNS",
+    "address": "85 Clarence Street, Hamilton Lake, Hamilton, 3204",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -37.795653,
+    "longitude": 175.282839,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5003/liquor-license.pdf"
+    },
+    "physicalStoreCode": "6669",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "714431ab-6e39-4df6-ac77-cfc5c1e25bc8",
+    "name": "PAK'nSAVE Cameron Road",
+    "banner": "PNS",
+    "address": "476 Cameron Road, Tauranga, 3110",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -37.696716,
+    "longitude": 176.161533,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5021/liquor-license.pdf"
+    },
+    "physicalStoreCode": "3282",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "3bfe040b-f0c9-45e0-949b-b9ad5a591d55",
+    "name": "PAK'nSAVE Papamoa",
+    "banner": "PNS",
+    "address": "42 Domain Road, Papamoa Beach, Papamoa, 3118",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -37.70191,
+    "longitude": 176.283687,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "7:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5014/liquor-license.pdf"
+    },
+    "physicalStoreCode": "3335",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "53989945-1a28-481d-a61c-d6f75f760ada",
+    "name": "PAK'nSAVE New Plymouth",
+    "banner": "PNS",
+    "address": "53 Leach Street, New Plymouth, 4310",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -39.05712,
+    "longitude": 174.08127,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5061/liquor-license.pdf"
+    },
+    "physicalStoreCode": "8057",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "076e8177-943b-41fc-a885-ba3d28297acf",
+    "name": "PAK'nSAVE Mill Street",
+    "banner": "PNS",
+    "address": "17 Mill Street, Whitiora, Hamilton, 3200",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -37.7799,
+    "longitude": 175.27281,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5011/liquor-license.pdf"
+    },
+    "physicalStoreCode": "6658",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "b39562a4-2b72-43fe-b9ba-eda1d651ad0b",
+    "name": "PAK'nSAVE Hastings",
+    "banner": "PNS",
+    "address": "Heretaunga Street West, West End Shopping Centre, Hastings, 4120",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -39.636804,
+    "longitude": 176.836635,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "6:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5030/liquor-license.pdf"
+    },
+    "physicalStoreCode": "8050",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+},  {
+    "id": "3bb30799-82ce-4648-8c02-5113228963ed",
+    "name": "PAK'nSAVE Te Awamutu",
+    "banner": "PNS",
+    "address": "650-670 Cambridge Road, Te Awamutu, 3800",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -38.008101,
+    "longitude": 175.340102,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "7:00 AM",
+        "close": "9:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5022/liquor-license.pdf"
+    },
+    "physicalStoreCode": "3330",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "48dd98cc-a757-4102-b15d-ea82b4b10571",
+    "name": "PAK'nSAVE Palmerston N",
+    "banner": "PNS",
+    "address": "Fergusson Street, Palmerston North, 4472",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -40.359198,
+    "longitude": 175.611537,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "7:00 AM",
+        "close": "11:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5063/liquor-license.pdf"
+    },
+    "physicalStoreCode": "8058",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "1c388d5e-29ac-4956-b476-cb3431353d2e",
+    "name": "PAK'nSAVE Tauriko",
+    "banner": "PNS",
+    "address": "2 Taurikura Drive, Tauriko, Tauranga, 3110",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -37.738653,
+    "longitude": 176.103745,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "8:00 AM",
+        "close": "10:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5050/liquor-license.pdf"
+    },
+    "physicalStoreCode": "8167",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}, {
+    "id": "b92cc33f-b5a8-4b57-9b82-412946800020",
+    "name": "PAK'nSAVE Taupo",
+    "banner": "PNS",
+    "address": "105-131 Ruapehu Street, Taupo, 3330",
+    "delivery": false,
+    "clickAndCollect": true,
+    "latitude": -38.685532,
+    "longitude": 176.073247,
+    "openingHours": [{
+        "day": "MONDAY",
+        "dayShort": "Mon",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "TUESDAY",
+        "dayShort": "Tue",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "WEDNESDAY",
+        "dayShort": "Wed",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "THURSDAY",
+        "dayShort": "Thu",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "FRIDAY",
+        "dayShort": "Fri",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "SATURDAY",
+        "dayShort": "Sat",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }, {
+        "day": "SUNDAY",
+        "dayShort": "Sun",
+        "open": "8:00 AM",
+        "close": "9:00 PM"
+    }],
+    "phone": "0800 PAKNSAVE",
+    "linkDetails": {
+        "liquorLicenseUrl": "https://s3-ap-southeast-2.amazonaws.com/prod-prod-grability-bucket/documents/000010/5070/liquor-license.pdf"
+    },
+    "physicalStoreCode": "3283",
+    "region": "NI",
+    "salesOrgId": "5000",
+    "openingDate": "0001-01-01T00:00:00",
+    "onboardingMode": false
+}]}

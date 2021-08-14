@@ -2,15 +2,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 
-storeURL = "https://www.thewarehouse.co.nz"
-productPrefix = ""
-
-dollars_pattern = '>([0-9][0-9]?)'
-cents_pattern = '>([0-9][0-9])'
+config = {'siteMeta': {'name': 'The Warehouse', 'mainURL': 'www.thewarehouse.co.nz', 'productPrefix': ''}, 'regex': {'dollars': '>([0-9][0-9]?)', 'cents': '>([0-9][0-9])'}, 'endpoints': {}}
 
 def getProductPrice(productId):
 
-    baseurl=f"{storeURL}/p/product/{productId}.html"
+    baseurl=f"https://{config['siteMeta']['mainURL']}/p/product/{productId}.html"
     header = {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
       "X-Requested-With": "XMLHttpRequest"
@@ -19,13 +15,19 @@ def getProductPrice(productId):
     with requests.session() as s:
       r = s.get(baseurl)
       soup = bs(r.content,'html.parser')
-      cents =  str(soup.find_all('span', {'class': "now-price-fraction"}))
+
+      scrapedData = {}
+
+      scrapedData['cents'] =  str(soup.find_all('span', {'class': "now-price-fraction"}))
       dollars =  str(soup.find_all('span', {'class': "now-price-integer"}))
-      productName = str(soup.find_all('h1', {'class': "h4 product-name"})[0].contents[0])
-      productDescription = str(soup.find_all('div', {'class': "long-description"})[0].contents[0])
-      productImageURL = str(soup.find_all('img', {'class': 'product-slider-image embed-responsive-item img-fluid'})[0]['src'])
-      centsprice =re.findall(cents_pattern, cents)
-      dollarsprice = re.findall(dollars_pattern, dollars)
+      productName = soup.find_all('h1', {'class': "h4 product-name"})
+      productName = str(productName[0].contents[0]) if len(productName) > 0 else ''
+      productDescription = soup.find_all('div', {'class': "long-description"})
+      productDescription = str(productDescription[0].contents[0]) if len(productDescription) > 0 else ''
+      productImageURL = soup.find_all('img', {'class': 'product-slider-image embed-responsive-item img-fluid'})
+      productImageURL = str(productImageURL[0]['src']) if len(productImageURL) > 0 else ''
+      centsprice =re.findall(config['regex']['cents'], scrapedData['cents'])
+      dollarsprice = re.findall(config['regex']['dollars'], dollars)
       multipack_detect = re.match("(.{1,})(\d{3,}ml).(\d{1,}) Pack", productName)
       volume_detect = re.match("(.{1,})(\d{3,}ml)", productName)
       if (len(dollarsprice) > 0):
