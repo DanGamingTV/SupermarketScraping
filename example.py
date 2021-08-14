@@ -4,6 +4,16 @@ import time
 import os.path
 
 stores = {'freshchoice': supermarketscraper.freshchoice.getStores(), 'newworld': supermarketscraper.newworld.getStores(), 'paknsave': supermarketscraper.paknsave.getStores(), 'supervalue': supermarketscraper.supervalue.getStores()}
+
+globalTotalTimeCodeStarted = time.time()
+
+timeCodeStarted = time.time()
+print(f"Time started: {timeCodeStarted}")
+def getTimeSpentRunning():
+    timeCodeEnded = time.time()
+    timeSpentRunning = timeCodeEnded-timeCodeStarted
+    timeCodeStarted = time.time()
+    return timeSpentRunning
 # print(supermarketscraper.countdown.getProductPrice('THISSHOULDFAIL'))
 # print(supermarketscraper.freshchoice.getProductPrice('THISSHOULDFAIL', stores['freshchoice'][0]['id']))
 # print(supermarketscraper.newworld.getProductPrice('THISSHOULDFAIL', stores['newworld'][0]['id']))
@@ -33,7 +43,7 @@ def scrapePriceData(api, productsToCheck, stores_stuff=None):
                 endTime = float(time.time())
                 timeTaken = "{:.2f}".format(endTime-startTime)
                 print(f"Time taken: {timeTaken}", friendlyStoreName, currentPrice, x['name'], productData['name'])
-            time.sleep(0.6)
+            time.sleep(0.1)
   else:
       for a in productsToCheck:
             startTime = float(time.time())
@@ -45,7 +55,7 @@ def scrapePriceData(api, productsToCheck, stores_stuff=None):
                 endTime = float(time.time())
                 timeTaken = "{:.2f}".format(endTime-startTime)
                 print(f"Time taken: {timeTaken}", friendlyStoreName, currentPrice, productData['name'])
-            time.sleep(0.6)
+            time.sleep(0.1)
   pathToWriteLatest = './data/' + friendlyStoreName + '/' + 'latest' + '.json'
   if (os.path.isfile(pathToWriteLatest)):
       with open(pathToWriteLatest) as json_file:
@@ -72,9 +82,19 @@ with open('./productsToCheck.json') as json_file:
             stores_file = json.load(stores_fi)
             for sus in stores_file['paknsave']:
                 print(sus['name'])
-            scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
-            # scrapePriceData(supermarketscraper.newworld, data['paknsave'], stores['newworld'])
-            scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])
-            scrapePriceData(supermarketscraper.supervalue, data_jsonfilething['freshchoice'], stores['supervalue'])
             scrapePriceData(supermarketscraper.thewarehouse, data_jsonfilething['thewarehouse'])
-            scrapePriceData(supermarketscraper.thewarehouse, data_jsonfilething['freshchoice'], stores['supervalue'])
+            print(f"The Warehouse ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
+            print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])
+            print(f"Fresh Choice ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.supervalue, data_jsonfilething['freshchoice'], stores['supervalue'])
+            print(f"SuperValue ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
+            print(f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.newworld, data_jsonfilething['paknsave'], stores['newworld'])
+            print(f"New World ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+
+            scriptEndTimeTotal = time.time()
+            print(f"This script in total ran for: {(scriptEndTimeTotal-globalTotalTimeCodeStarted)} seconds ({(scriptEndTimeTotal-globalTotalTimeCodeStarted)/60} minutes, {(scriptEndTimeTotal-globalTotalTimeCodeStarted)/60/60} hours")
+            
