@@ -1,9 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import re
-import json
-import time
-import os.path
 
 storeURL = "https://www.thewarehouse.co.nz"
 productPrefix = ""
@@ -63,7 +60,7 @@ def getProductPrice(productId):
       return price
       
 
-# print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
+""" # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
 productsToCheck = ["R671608", "R671606", "R1907052", "R2613851", "R2628987", "R501186", "R2628988", "R2378859", "R2613850", "R2717468", "R2457276", "R2457274", "R1559892", "R2755897", "R1907053", "R501187", "R1559891", "R2720433", "R2720434", "R2494486", "R2381465", "R2137497", "R2607463", "R2494487", "R2538645", "R2381615", "R2229714", "R1648759", "R2607462", "R2391372", "R2426919", "R2481578", "R2456984", "R2456983", "R2560028", "R1573117", "R1539597", "R2739987", "R1573116", "R151415", "R500135", "R2226500", "R671491", "R2657178", "R1445715", "R671492", "R1233239", "R2739986", "R2657177", "R2391373", "R2457274", "R2197289", "R2457276"]
 dataList = []
 
@@ -88,4 +85,4 @@ else:
     with open('./data/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
         json.dump(dataList, f, ensure_ascii=False, indent=4)
     with open('./data/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
-        json.dump(dataList, f, ensure_ascii=False, indent=4)
+        json.dump(dataList, f, ensure_ascii=False, indent=4) """

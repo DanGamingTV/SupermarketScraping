@@ -2,11 +2,9 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 import json
-import time
-import os.path
 
-storeURL = "https://www.paknsave.co.nz"
-productPrefix = "pns"
+storeURL = "https://www.newworld.co.nz"
+productPrefix = "nw"
 
 dollars_pattern = '>([0-9][0-9]?)'
 cents_pattern = '>([0-9][0-9])'
@@ -136,7 +134,7 @@ def getProductPrice(productId, storeId):
       return price
 
 
-# print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
+""" # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
 #productsToCheck = ["5011153_ea_000"]
 productsToCheck = ["5290181_ea_000", "5289891_ea_000", "5289890_ea_000", "5264576_ea_000", "5272987_ea_000", "5289889_ea_000", "5283362_ea_000", "5003156_ea_000", "5228254_ea_000", "5210055_ea_000", "5007492_ea_000", "5020662_ea_000", "5007494_ea_000", "5010699_ea_000", "5005255_ea_000", "5008928_ea_000pns", "5032368_ea_000", "5003151_ea_000", "5001443_ea_000", "5030250_ea_000", "5009239_ea_000", "5237753_ea_000", "5032373_ea_000", "5009240_ea_000", "5257298_ea_000", "5237735_ea_000", "5032374_ea_000", "5095698_ea_000", "5091377_ea_000", "5215383_ea_000", "5254654_ea_000", "5289907_ea_000", "5278542_ea_000", "5278541_ea_000", "5264523_ea_000", "5272988_ea_000", "5017493_ea_000", "5030249_ea_000", "5004117_ea_000", "5242374_ea_000", "5278094_ea_000", "5269459_ea_000", "5261257_ea_000", "5002893_ea_000", "5090618_ea_000", "5284331_ea_000", "5011153_ea_000", "5284332_ea_000", "5009490_ea_000", "5242373_ea_000", "5007647_ea_000", "5213974_ea_000", "5210130_ea_000", "5107264_ea_000", "5007644_ea_000", "5004703_ea_000", "5210048_ea_000", "5210061_ea_000", "5007441_ea_000", "5011173_ea_000"]
 dataList = []
@@ -144,7 +142,7 @@ stores_stuff = getStores()
 
 for a in productsToCheck:
     for x in stores_stuff:
-        if ((x and ('id' in x))):   
+        if ((x and ('id' in x))):  
           currentPrice = getProductPrice(a, x['id'])
           storeModified = {'id': x['id'], 'name': x['name'], 'address': x['address']}
           productData = currentPrice['productData']
@@ -166,4 +164,4 @@ else:
     with open('./data/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
         json.dump(dataList, f, ensure_ascii=False, indent=4)
     with open('./data/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
-        json.dump(dataList, f, ensure_ascii=False, indent=4)
+        json.dump(dataList, f, ensure_ascii=False, indent=4) """

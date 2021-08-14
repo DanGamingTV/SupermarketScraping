@@ -1,9 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import re
-import json
-import time
-import os.path
 
 storeURL = "freshchoice.co.nz"
 productPrefix = ""
@@ -105,7 +102,7 @@ def getProductPrice(productId, storeId):
     return price
 
 
-# print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
+""" # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
 #productsToCheck = ["5011153_ea_000"]
 productsToCheck = [
     "mother-kicked-apple-500ml",
@@ -209,4 +206,4 @@ else:
 
 #I assume this url changes the store (200 response)
 #tester = requests.get("https://store.freshchoice.co.nz/5c8f2abb777a4233c400918b/i_choose_you")
-#print(tester.url)
+#print(tester.url) """
