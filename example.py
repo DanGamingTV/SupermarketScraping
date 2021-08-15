@@ -2,6 +2,7 @@ import supermarketscraper
 import json
 import time
 import os.path
+import datetime
 
 stores = {'freshchoice': supermarketscraper.freshchoice.getStores(), 'newworld': supermarketscraper.newworld.getStores(), 'paknsave': supermarketscraper.paknsave.getStores(), 'supervalue': supermarketscraper.supervalue.getStores()}
 
@@ -41,7 +42,7 @@ def scrapePriceData(api, productsToCheck, stores_stuff=None):
             productData = currentPrice['productData']
             del currentPrice['productData']
             if (currentPrice['price'] != '0.00'):
-                dataList.append({'productData': productData, 'priceData': currentPrice, 'store': storeModified})
+                dataList.append({'productData': productData, 'priceData': currentPrice, 'store': storeModified, 'timestamp': datetime.datetime.now().isoformat()})
                 endTime = float(time.time())
                 timeTaken = "{:.2f}".format(endTime-startTime)
                 print(f"Time taken: {timeTaken}", friendlyStoreName, currentPrice, x['name'], productData['name'])
@@ -53,7 +54,7 @@ def scrapePriceData(api, productsToCheck, stores_stuff=None):
             productData = currentPrice['productData']
             del currentPrice['productData']
             if (currentPrice['price'] != '0.00'):
-                dataList.append({'productData': productData, 'priceData': currentPrice})
+                dataList.append({'productData': productData, 'priceData': currentPrice, 'timestamp': datetime.datetime.now().isoformat()})
                 endTime = float(time.time())
                 timeTaken = "{:.2f}".format(endTime-startTime)
                 print(f"Time taken: {timeTaken}", friendlyStoreName, currentPrice, productData['name'])
