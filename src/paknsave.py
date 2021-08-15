@@ -107,6 +107,11 @@ def getProductPrice(productId, storeId):
                 price['pricePerLitre'] = calculatedPricePerLitre
                 price['bestPricePerLitre'] = calculatedBestPricePerLitre
                 scrapedData['pplValid'] = True
+      if (price['pricePerLitre'] and 'multipack' in price['productData']):
+          if (price['pricePerLitre'] > 16):
+              # assume that foodstuffs messed up with their provided unit pricing, fix it ourselves
+              price['pricePerLitre'] = price['pricePerLitre']/int(price['productData']['multipack']['quantity'])
+              price['bestPricePerLitre'] = price['bestPricePerLitre']/int(price['productData']['multipack']['quantity'])
     try:
         mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
         mbData = json.loads(mbR.content)
