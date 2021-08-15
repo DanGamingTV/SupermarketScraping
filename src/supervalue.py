@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 
-config = {'siteMeta': {'name': 'Fresh Choice', 'mainURL': 'supervalue.co.nz', 'productPrefix': ''}, 'regex': {'pricePerLitre': "\(\$(\d{1,}.\d{1,}) (?:per ){0,}100[M-m][L-l]\)"}, 'endpoints': {}}
+config = {'siteMeta': {'name': 'Super Value', 'mainURL': 'supervalue.co.nz', 'productPrefix': ''}, 'regex': {'pricePerLitre': "\(\$(\d{1,}.\d{1,}) (?:per ){0,}100[M-m][L-l]\)"}, 'endpoints': {}}
 config.update({'endpoints': {'storeList': f"https://store.{config['siteMeta']['mainURL']}/api/v1/stores"}})
 
 def getStoreIDs():

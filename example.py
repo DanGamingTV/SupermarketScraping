@@ -7,12 +7,14 @@ stores = {'freshchoice': supermarketscraper.freshchoice.getStores(), 'newworld':
 
 globalTotalTimeCodeStarted = time.time()
 
-timeCodeStarted = time.time()
-print(f"Time started: {timeCodeStarted}")
+globalState = {}
+globalState['timeCodeStarted'] = time.time()
+
+print(f"Time started: {globalState['timeCodeStarted']}")
 def getTimeSpentRunning():
     timeCodeEnded = time.time()
-    timeSpentRunning = timeCodeEnded-timeCodeStarted
-    timeCodeStarted = time.time()
+    timeSpentRunning = timeCodeEnded-globalState['timeCodeStarted']
+    globalState['timeCodeStarted'] = time.time()
     return timeSpentRunning
 # print(supermarketscraper.countdown.getProductPrice('THISSHOULDFAIL'))
 # print(supermarketscraper.freshchoice.getProductPrice('THISSHOULDFAIL', stores['freshchoice'][0]['id']))
@@ -84,6 +86,8 @@ with open('./productsToCheck.json') as json_file:
                 print(sus['name'])
             scrapePriceData(supermarketscraper.thewarehouse, data_jsonfilething['thewarehouse'])
             print(f"The Warehouse ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            scrapePriceData(supermarketscraper.mightyape, data_jsonfilething['mightyape'])
+            print(f"Mighty Ape ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
             print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])

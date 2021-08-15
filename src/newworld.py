@@ -107,18 +107,21 @@ def getProductPrice(productId, storeId):
                 price['pricePerLitre'] = calculatedPricePerLitre
                 price['bestPricePerLitre'] = calculatedBestPricePerLitre
                 scrapedData['pplValid'] = True
-    mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
-    mbData = json.loads(mbR.content)
-    if (mbData['success'] == True):
-        multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
-        multibuyPrice = mbData['promoGroup']['multiBuyPrice']
-        if (multibuyQuantity > 1):
-            price['multiBuy'] = {'quantity': multibuyQuantity, 'value': multibuyPrice, 'perUnit': multibuyPrice/multibuyQuantity}
-            price['bestPrice'] = multibuyPrice/multibuyQuantity
-            if (scrapedData['pplValid'] == True):
-                price['bestPrice'] = float(price['bestPrice'])
-                price['price'] = float(price['price'])
-                price['pricePerLitre'] = float(price['pricePerLitre'])
-                price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
+    try:
+        mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
+        mbData = json.loads(mbR.content)
+        if (mbData['success'] == True):
+            multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
+            multibuyPrice = mbData['promoGroup']['multiBuyPrice']
+            if (multibuyQuantity > 1):
+                price['multiBuy'] = {'quantity': multibuyQuantity, 'value': multibuyPrice, 'perUnit': multibuyPrice/multibuyQuantity}
+                price['bestPrice'] = multibuyPrice/multibuyQuantity
+                if (scrapedData['pplValid'] == True):
+                    price['bestPrice'] = float(price['bestPrice'])
+                    price['price'] = float(price['price'])
+                    price['pricePerLitre'] = float(price['pricePerLitre'])
+                    price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
+    except ConnectionError:
+        print("shit")
       
     return price

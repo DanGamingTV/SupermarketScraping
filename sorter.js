@@ -1,6 +1,8 @@
 const fs = require('fs');
 
-var paths = ["G:\\Work\\Projects\\Hobbies\\SupermarketScraping\\data\\countdown\\latest.json"]
+var theRootThing = "G:\\Work\\Projects\\Hobbies\\SupermarketScraping\\data\\"
+
+var paths = [`${theRootThing}mightyape\\latest.json`, `${theRootThing}paknsave\\latest.json`, `${theRootThing}countdown\\latest.json`, `${theRootThing}freshchoice\\latest.json`, `${theRootThing}supervalue\\latest.json`, `${theRootThing}thewarehouse\\latest.json`]
 var rawData;
 var jsonData = [];
 
@@ -22,7 +24,7 @@ function compare( a, b ) {
 var newArray = [];
 
 for (var price of jsonData) {
-  if (price.priceData.bestPricePerLitre && price.productData.name.includes('')) {
+  if (price.priceData.bestPricePerLitre && (price.productData.name.toLowerCase()).includes('')) {
   //var price = {'productData': {'name': price_old['productData']['name']}, 'priceData': price_old['priceData']}
   var tempOb = price.priceData
   tempOb['name'] = price.productData.name
