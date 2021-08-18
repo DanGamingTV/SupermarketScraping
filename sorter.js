@@ -24,7 +24,7 @@ function compare( a, b ) {
 var newArray = [];
 
 for (var price of jsonData) {
-  if (price.priceData.bestPricePerLitre && (price.productData.name.toLowerCase()).includes('')) {
+  if (price.priceData.bestPricePerLitre && (price.productData.name.toLowerCase()).includes('mother')) {
   //var price = {'productData': {'name': price_old['productData']['name']}, 'priceData': price_old['priceData']}
   var tempOb = price.priceData
   tempOb['name'] = price.productData.name
