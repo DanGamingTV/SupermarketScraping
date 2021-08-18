@@ -1,3 +1,4 @@
+import asyncio
 import requests
 from bs4 import BeautifulSoup as bs
 import re
@@ -8,7 +9,7 @@ config = {'siteMeta': {'name': 'New World', 'mainURL': 'https://www.newworld.co.
 state = {}
 state["currentStoreId"] = ""
 
-def getStoreIDs():
+async def getStoreIDs():
     storeIDs = []
     with requests.session() as s:
         r = s.get(f"{config['siteMeta']['mainURL']}/CommonApi/Store/GetStoreList")
@@ -17,7 +18,7 @@ def getStoreIDs():
             storeIDs.append(x['id'])
         return storeIDs
 
-def getStores():
+async def getStores():
     stores_list = []
     with requests.session() as s:
         r = s.get(f"{config['siteMeta']['mainURL']}/CommonApi/Store/GetStoreList")
@@ -26,15 +27,16 @@ def getStores():
             stores_list.append(x)
         return stores_list
 
-def getProductPrice(productId, storeId):
+async def getMultiBuyData(prodId, s):
+    mbRstuff = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+prodId)
+    mbDat = json.loads(mbRstuff.content)
+    return mbDat
+
+async def getProductPrice(productId, storeId):
     productId = productId.replace(config['siteMeta']['productPrefix'], '') if productId.endswith(config['siteMeta']['productPrefix']) else productId # If productId has a prefix added to it, remove it.
     url = f"{config['siteMeta']['mainURL']}/CommonApi/Store/ChangeStore?storeId={storeId}" # URL to change store
     baseurl=f"{config['siteMeta']['mainURL']}/shop/product/{productId}"
     with requests.session() as s:
-      try:
-        s.get(baseurl)
-      except ConnectionError:
-          print("shit")
       s.get(url)
       state["currentStoreId"] = storeId
 
@@ -80,14 +82,11 @@ def getProductPrice(productId, storeId):
       if (len(dollarsprice) > 0):
           if (len(centsprice) > 0):
               salePrice = f"{dollarsprice[0]}.{centsprice[0]}"
-              # return price
           else:
             salePrice = f"{dollarsprice[0]}.00"
-            # return price
       else:
           if (len(centsprice) > 0):
               salePrice = f"0.{centsprice[0]}"
-              # return price
           else:
             salePrice = "0.00"
         
@@ -112,24 +111,34 @@ def getProductPrice(productId, storeId):
               # assume that foodstuffs messed up with their provided unit pricing, fix it ourselves
               price['pricePerLitre'] = price['pricePerLitre']/int(price['productData']['multipack']['quantity'])
               price['bestPricePerLitre'] = price['bestPricePerLitre']/int(price['productData']['multipack']['quantity'])
-    try:
-        mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
-        try:
-            mbData = json.loads(mbR.content)
-            if (mbData['success'] == True):
-                multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
-                multibuyPrice = mbData['promoGroup']['multiBuyPrice']
-                if (multibuyQuantity > 1):
-                    price['multiBuy'] = {'quantity': multibuyQuantity, 'value': multibuyPrice, 'perUnit': multibuyPrice/multibuyQuantity}
-                    price['bestPrice'] = multibuyPrice/multibuyQuantity
-                    if (scrapedData['pplValid'] == True):
-                        price['bestPrice'] = float(price['bestPrice'])
-                        price['price'] = float(price['price'])
-                        price['pricePerLitre'] = float(price['pricePerLitre'])
-                        price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
-        except json.decoder.JSONDecodeError:
-            print("welp, error decoding json oof")
-    except ConnectionError:
-        print("shit")
+    
+    mbData = await getMultiBuyData(productId, s)
+    if (mbData['success'] == True):
+        multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
+        multibuyPrice = mbData['promoGroup']['multiBuyPrice']
+        if (multibuyQuantity > 1):
+            price['multiBuy'] = {'quantity': multibuyQuantity, 'value': multibuyPrice, 'perUnit': multibuyPrice/multibuyQuantity}
+            price['bestPrice'] = multibuyPrice/multibuyQuantity
+            if (scrapedData['pplValid'] == True):
+                price['bestPrice'] = float(price['bestPrice'])
+                price['price'] = float(price['price'])
+                price['pricePerLitre'] = float(price['pricePerLitre'])
+                price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
       
     return price
+
+# arrayOfProductIdsForTestingPurposes = ["5290181_ea_000", "5007495_ea_000"]
+# 
+# productGathered = []
+# 
+# async def main():
+#     print('start function main')
+#     storesGottenViaAsync = await getStoreIDs()
+#     for a in arrayOfProductIdsForTestingPurposes:
+#         task = asyncio.create_task(getProductPrice(a, storesGottenViaAsync[0]))
+#         productGathered.append(await task)
+#         print(await task)
+#     print(productGathered)
+# 
+# 
+# asyncio.run(main())
