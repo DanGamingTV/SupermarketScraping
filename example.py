@@ -108,15 +108,15 @@ with open('./productsToCheck.json') as json_file:
           # scrapePriceData(supermarketscraper.thewarehouse, data['thewarehouse'])
           with open('./storesToCheck.json') as stores_fi:
             stores_file = json.load(stores_fi)
-            for sus in stores_file['paknsave']:
-                print(sus['name'])
+            # for sus in stores_file['paknsave']:
+            #     print(sus['name'])
             scrapePriceData(supermarketscraper.thewarehouse, data_jsonfilething['thewarehouse'])
             print(f"The Warehouse ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.mightyape, data_jsonfilething['mightyape'])
             print(f"Mighty Ape ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
             print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-            scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
+            scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores['paknsave'])
             print(f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])
             print(f"Fresh Choice ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
