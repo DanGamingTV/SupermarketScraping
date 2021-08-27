@@ -1,0 +1,2 @@
+scrapePrices.bat
+comparePrices.bat

@@ -2,3 +2,5 @@
 node_modules
 __pycache__
 data/*/*.json
+data_changes/*/*.json
+data_changes/*.json
