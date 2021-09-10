@@ -66,4 +66,8 @@ def getProductPrice(productId):
           calculatedBestPricePerLitre = float(price['bestPrice'])*(1000/actualVolume)
           price['pricePerLitre'] = calculatedPricePerLitre
           price['bestPricePerLitre'] = calculatedBestPricePerLitre
+      if (price['bestPricePerLitre'] > 30):
+        # assume that their data is messed up (most likely they are 10x more than actual)
+        price['bestPricePerLitre'] = price['bestPricePerLitre']/10
+        price['pricePerLitre'] = price['pricePerLitre']/10
       return price

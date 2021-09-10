@@ -55,6 +55,10 @@ def getProductPrice(productId, storeId):
         pricePerLitre = re.match(config['regex']['pricePerLitre'], pricePerLitre[0].text)[1]
         price['pricePerLitre'] = float(pricePerLitre)*10
         price['bestPricePerLitre'] = float(pricePerLitre)*10
+    if (price['bestPricePerLitre'] > 30):
+      # assume that their data is messed up (most likely they are 10x more than actual)
+      price['bestPricePerLitre'] = price['bestPricePerLitre']/10
+      price['pricePerLitre'] = price['pricePerLitre']/10
     return price
 
 
