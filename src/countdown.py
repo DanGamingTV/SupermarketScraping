@@ -47,11 +47,6 @@ def getProductPrice(productId):
       matchVolumeFromProductName = re.findall(config['regex']['productNameVolume'], data['name'])
       if (len(matchVolumeFromProductName) > 0):
         price['productData']['volume'] = matchVolumeFromProductName[0]
-      if (price['bestPricePerLitre'] > 30):
-        # assume that their data is messed up (most likely they are 10x more than actual)
-        price['bestPricePerLitre'] = price['bestPricePerLitre']/10
-        price['pricePerLitre'] = price['pricePerLitre']/10
-
       return price
 
 
