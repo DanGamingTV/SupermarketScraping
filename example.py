@@ -122,8 +122,8 @@ with open('./productsToCheck.json') as json_file:
             print(f"Fresh Choice ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             scrapePriceData(supermarketscraper.supervalue, data_jsonfilething['freshchoice'], stores['supervalue'])
             print(f"SuperValue ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-            #scrapePriceData(supermarketscraper.newworld, data_jsonfilething['paknsave'], stores['newworld'])
-            #print(f"New World ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            # scrapePriceData(supermarketscraper.newworld, data_jsonfilething['paknsave'], stores['newworld'])
+            # print(f"New World ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
 
             scriptEndTimeTotal = time.time()
             print(f"This script in total ran for: {(scriptEndTimeTotal-globalTotalTimeCodeStarted)} seconds ({(scriptEndTimeTotal-globalTotalTimeCodeStarted)/60} minutes, {(scriptEndTimeTotal-globalTotalTimeCodeStarted)/60/60} hours")

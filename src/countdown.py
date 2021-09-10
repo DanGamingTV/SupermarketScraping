@@ -22,7 +22,7 @@ def getProductPrice(productId):
         return {'error': {'message': data['Message']}}
       price = {'productData': {'name': data['name'], 'productShopPage': f"https://{config['siteMeta']['mainURL']}/shop/productdetails?stockcode="+data['sku']},'bestPrice': data['price']['salePrice'] ,'price': data['price']['salePrice'], 'pricePerLitre': data['size']['cupPrice']*10, 'bestPricePerLitre': data['size']['cupPrice']*10}
       for x in data['productTags']:
-        if(x['tagType'] == "IsGreatPriceMultiBuy"):
+        if("multibuy" in x['tagType'].lower()):
             price['multiBuy'] = {'quantity': x['multiBuy']['quantity'], 'value': x['multiBuy']['value'], 'perUnit': x['multiBuy']['value']/x['multiBuy']['quantity']}
             price['bestPrice'] = x['multiBuy']['value']/x['multiBuy']['quantity']
             price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
@@ -51,7 +51,7 @@ def getProductPrice(productId):
 
 
 # print(getProductPrice("5011153_ea_000pns?name=energy-drink-can", "3bb30799-82ce-4648-8c02-5113228963ed"))
-# print(getProductPrice("315125"))
+# print(getProductPrice("11045"))
 
 """ productsToCheck = ["84822", "171680", "172315", "171356", "729764", "18330", "83870", "738591", "11045", "82413", "733809", "116695", "705714", "323863", "264490", "711024", "195828", "683934", "694546", "195827", "739385", "108466", "162536", "707980", "112438", "738677", "120433", "705699", "120375", "332724", "764892", "361734", "329812", "694545", "315692", "139864", "384544", "694547", "132815", "117141", "622020", "489787", "124312", "511504", "62911", "803888", "532955", "82273", "694549", "590411", "678202", "82274", "744335", "820268"]
 dataList = []
