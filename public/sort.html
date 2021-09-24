@@ -67,7 +67,7 @@ thead > tr > td {
             storesToCheck.forEach(st => {
                 fetch(`/${st}/latest.json`).then(response => response.json()).then(d => {
                     console.log(d)
-                data = [...data, ...d.splice(1)]
+                data = [...data, ...d]
                 itemsProcessed++;
     if(itemsProcessed === storesToCheck.length) {
       callback();
