@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import re
+import asyncio
 
 config = {'siteMeta': {'name': 'Fresh Choice', 'mainURL': 'freshchoice.co.nz', 'productPrefix': ''}, 'regex': {'pricePerLitre': "\(\$(\d{1,}.\d{1,}) (?:per ){0,}100[M-m][L-l]\)"}, 'endpoints': {}}
 config.update({'endpoints': {'storeList': f"https://store.{config['siteMeta']['mainURL']}/api/v1/stores"}})
@@ -32,7 +33,7 @@ def getStores():
     return stores_list
 
 
-def getProductPrice(productId, storeId):
+async def getProductPrice(productId, storeId):
     url = f"https://store.{config['siteMeta']['mainURL']}/{storeId}/i_choose_you"
     baseurl = requests.get(url).url
     baseurl = f"{baseurl}lines/{productId}"

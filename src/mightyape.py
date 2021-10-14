@@ -1,10 +1,11 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import re
+import asyncio
 
 config = {'siteMeta': {'name': 'Mighty Ape', 'mainURL': 'www.mightyape.co.nz', 'productPrefix': ''}, 'regex': {'dollars': '(\d{1,})', 'cents': '(\d{2,})', 'multipackDetect': '(\d{1,}ml).{0,}\((\d{1,}).{0,}p.{0,}k\)'}, 'endpoints': {}}
 
-def getProductPrice(productId):
+async def getProductPrice(productId):
 
     baseurl=f"https://{config['siteMeta']['mainURL']}/product/name/{productId}"
     header = {
