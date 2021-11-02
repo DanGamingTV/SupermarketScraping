@@ -90,22 +90,27 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
         #    pass
     coros_per_product2 = [per_product2(a) for a in productsToCheck]
     await asyncio.gather(*coros_per_product2)
-    pathToWriteLatest = './data/' + friendlyStoreName + '/' + 'latest' + '.json'
-    if (os.path.isfile(pathToWriteLatest)):
-        with open(pathToWriteLatest) as json_file:
-            data = json.load(json_file)
-            if (dataList == data):
-                print("latest data saved is the same as the data just gathered. not going to write new file.")
-            else:
-                with open('./data/' + friendlyStoreName + '/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
-                    json.dump(dataList, f, ensure_ascii=False, indent=4)
-                with open(pathToWriteLatest, 'w', encoding='utf-8') as f:
-                    json.dump(dataList, f, ensure_ascii=False, indent=4)
-    else:
-        with open('./data/' + friendlyStoreName + '/' +  str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
-            json.dump(dataList, f, ensure_ascii=False, indent=4)
-        with open('./data/' + friendlyStoreName + '/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
-            json.dump(dataList, f, ensure_ascii=False, indent=4)
+  print('hey hey hey')
+  pathToWriteLatest = './data/' + friendlyStoreName + '/' + 'latest' + '.json'
+  if (os.path.isfile(pathToWriteLatest)):
+      with open(pathToWriteLatest) as json_file:
+          data = json.load(json_file)
+          if (dataList == data):
+              print("latest data saved is the same as the data just gathered. not going to write new file.")
+          else:
+              with open('./data/' + friendlyStoreName + '/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+                  print(f"begin write file for {friendlyStoreName}")
+                  json.dump(dataList, f, ensure_ascii=False, indent=4)
+              with open(pathToWriteLatest, 'w', encoding='utf-8') as f:
+                  print(f"begin write file for {friendlyStoreName}")
+                  json.dump(dataList, f, ensure_ascii=False, indent=4)
+  else:
+      with open('./data/' + friendlyStoreName + '/' +  str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+          print(f"begin write file for {friendlyStoreName}")
+          json.dump(dataList, f, ensure_ascii=False, indent=4)
+      with open('./data/' + friendlyStoreName + '/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
+          print(f"begin write file for {friendlyStoreName}")
+          json.dump(dataList, f, ensure_ascii=False, indent=4)
 
 async def main():
     with open('./productsToCheck.json') as json_file:
@@ -120,9 +125,9 @@ async def main():
                 print(f"The Warehouse ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
                 await scrapePriceData(supermarketscraper.mightyape, data_jsonfilething['mightyape'])
                 print(f"Mighty Ape ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-                await scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
-                print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-                await scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores['paknsave'])
+                # await scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
+                # print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+                await scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
                 print(f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
                 await scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])
                 print(f"Fresh Choice ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
