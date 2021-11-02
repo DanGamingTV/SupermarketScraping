@@ -21,7 +21,6 @@ def getTimeSpentRunning():
 # print(supermarketscraper.countdown.getProductPrice('THISSHOULDFAIL'))
 # print(supermarketscraper.freshchoice.getProductPrice('THISSHOULDFAIL', stores['freshchoice'][0]['id']))
 # print(supermarketscraper.newworld.getProductPrice('THISSHOULDFAIL', stores['newworld'][0]['id']))
-# print(supermarketscraper.paknsave.getProductPrice('THISSHOULDFAIL', stores['paknsave'][0]['id']))
 # print(supermarketscraper.supervalue.getProductPrice('THISSHOULDFAIL', stores['supervalue'][0]['id']))
 # print(supermarketscraper.thewarehouse.getProductPrice('THISSHOULDFAIL'))
 
@@ -111,6 +110,8 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
       with open('./data/' + friendlyStoreName + '/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
           print(f"begin write file for {friendlyStoreName}")
           json.dump(dataList, f, ensure_ascii=False, indent=4)
+
+
 
 async def main():
     with open('./productsToCheck.json') as json_file:
