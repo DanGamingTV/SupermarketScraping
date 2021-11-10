@@ -1,9 +1,8 @@
-*/data/*.json
 node_modules
 __pycache__
-data/*/*.json
 data_changes/*/*.json
+data/*/*.json
 data_changes/*.json
-data/.git
+data/*.json
 data_changes/.git
-data/
+data/.git

@@ -97,14 +97,14 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
           if (dataList == data):
               print("latest data saved is the same as the data just gathered. not going to write new file.")
           else:
-              with open('./data/' + friendlyStoreName + '/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+              with open('./data/' + friendlyStoreName + '/archive/' + str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
                   print(f"begin write file for {friendlyStoreName}")
                   json.dump(dataList, f, ensure_ascii=False, indent=4)
               with open(pathToWriteLatest, 'w', encoding='utf-8') as f:
                   print(f"begin write file for {friendlyStoreName}")
                   json.dump(dataList, f, ensure_ascii=False, indent=4)
   else:
-      with open('./data/' + friendlyStoreName + '/' +  str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
+      with open('./data/' + friendlyStoreName + '/archive/' +  str(int(time.time())) + '.json', 'w', encoding='utf-8') as f:
           print(f"begin write file for {friendlyStoreName}")
           json.dump(dataList, f, ensure_ascii=False, indent=4)
       with open('./data/' + friendlyStoreName + '/' + 'latest' + '.json', 'w', encoding='utf-8') as f:
