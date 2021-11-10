@@ -2,10 +2,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 import json
+import asyncio
 
 config = {'siteMeta': {'name': 'countdown', 'mainURL': 'shop.countdown.co.nz'}, 'regex': {'multiPack': "(\d{1,})pk", 'packageType': "(.{1,}ml) cans", 'volumeSize': "(.{1,}ml)", 'productNameVolume': ". (\d{1,}ml)"}}
 
-def getProductPrice(productId):
+async def getProductPrice(productId):
     baseurl=f"https://{config['siteMeta']['mainURL']}/api/v1/products/{productId}"
     header = {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",

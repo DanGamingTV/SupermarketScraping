@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 import json
+import asyncio
 
 config = {'siteMeta': {'name': 'Paknsave', 'mainURL': 'https://www.paknsave.co.nz', 'productPrefix': 'pns'}, 'regex': {'dollars': '>([0-9][0-9]?)', 'cents': '>([0-9][0-9])', 'volumeData': "Serving.pack: (\d{1,}) Serving size: (.{1,})"}}
 
@@ -26,18 +27,21 @@ def getStores():
             stores_list.append(x)
         return stores_list
 
-def getProductPrice(productId, storeId):
+async def getProductPrice(productId, storeId):
     productId = productId.replace(config['siteMeta']['productPrefix'], '') if productId.endswith(config['siteMeta']['productPrefix']) else productId # If productId has a prefix added to it, remove it.
-    url = f"{config['siteMeta']['mainURL']}/CommonApi/Store/ChangeStore?storeId={storeId}" # URL to change store
+    url = f"{config['siteMeta']['mainURL']}/CommonApi/Store/ChangeStore?storeId={storeId}&clickSource=list" # URL to change store
     baseurl=f"{config['siteMeta']['mainURL']}/shop/product/{productId}"
     with requests.session() as s:
-      try:
-        s.get(baseurl)
-      except ConnectionError:
-          print("shit")
-      s.get(url)
+      storeSuccessfullySet = False
+      if (not storeId == state["currentStoreId"]):
+          storechange = s.get(url)
+          print(storechange.text)
+          storeSuccessfullySet = True
+      else:
+          storeSuccessfullySet = True
       state["currentStoreId"] = storeId
-
+      s.get(baseurl)
+      s.cookies["STORE_ID_V2"] = storeId
       r = s.get(baseurl)
       if ('Sorry, this item is unavailable in your chosen store' in r.text):
           return {'productData': {'name': '', 'productId': '', 'productShopPage': '','productImageURL': '', 'productDescription': ''}, 'bestPrice': '0.00' ,'price': '0.00'}
