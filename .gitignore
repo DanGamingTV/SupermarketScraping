@@ -6,3 +6,4 @@ data_changes/*/*.json
 data_changes/*.json
 data/.git
 data_changes/.git
+data/
