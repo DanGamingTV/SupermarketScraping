@@ -164,4 +164,4 @@ for (var objectKey of Object.keys(jsonData)) {
 // console.log('==============')
 // console.log(newArray)
 fs.writeFileSync('./data_changes/latest.json', JSON.stringify(newArray));
-fs.writeFileSync(`./data_changes/${new Date().getTime()}.json`, JSON.stringify(newArray));
+fs.writeFileSync(`./data_changes/archive/${new Date().getTime()}.json`, JSON.stringify(newArray));
