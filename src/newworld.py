@@ -120,6 +120,7 @@ async def getProductPrice(productId, storeId):
         mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
         try:
             mbData = json.loads(mbR.content)
+            print(f"test data multibuy: {mbData}")
             if (mbData['success'] == True):
                 multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
                 multibuyPrice = mbData['promoGroup']['multiBuyPrice']
@@ -131,8 +132,8 @@ async def getProductPrice(productId, storeId):
                         price['price'] = float(price['price'])
                         price['pricePerLitre'] = float(price['pricePerLitre'])
                         price['bestPricePerLitre'] = price['bestPrice'] / (price['price'] / price['pricePerLitre'])
-        except json.decoder.JSONDecodeError:
-            print("welp, error decoding json oof")
+        except json.decoder.JSONDecodeError as e:
+            print(f"JSONDecodeError: {e}")
     except ConnectionError:
         print("shit")
       

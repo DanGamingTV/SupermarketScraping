@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-var theRootThing = "G:\\Work\\Projects\\Hobbies\\SupermarketScraping\\data\\"
+var theRootThing = "./data/"
 
 var supermarket_foldernames = ['paknsave', 'countdown', 'mightyape', 'thewarehouse', 'freshchoice', 'supervalue']
 
@@ -15,11 +15,11 @@ var files = fs.readdirSync(`${theRootThing}${supermarketname}`)
   var currentCheckFile = 'latest.json'
   paths.push({
   "shorthand": `${supermarketname} Earlier`,
-  "path": `${theRootThing}${supermarketname}\\${previousCheckFile}`
+  "path": `${theRootThing}${supermarketname}/${previousCheckFile}`
 })
 paths.push({
   "shorthand": `${supermarketname} Now`,
-  "path": `${theRootThing}${supermarketname}\\${currentCheckFile}`
+  "path": `${theRootThing}${supermarketname}/${currentCheckFile}`
 })
 //});
 }

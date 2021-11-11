@@ -1,6 +1,6 @@
 {
   "name": "supermarketscraping",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A set of python scripts to scrape price data from supermarket and ecommerce websites in New Zealand",
   "main": "server.js",
   "dependencies": {
