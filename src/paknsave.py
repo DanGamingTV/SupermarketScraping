@@ -120,7 +120,6 @@ async def getProductPrice(productId, storeId):
         mbR = s.get(config['siteMeta']['mainURL']+"/CommonApi/PromoGroup/GetPromoGroup?productId="+productId)
         try:
             mbData = json.loads(mbR.content)
-            print(f"test data multibuy: {mbData}")
             if (mbData['success'] == True):
                 multibuyQuantity = mbData['promoGroup']['multiBuyQuantity']
                 multibuyPrice = mbData['promoGroup']['multiBuyPrice']
