@@ -7,15 +7,17 @@ var supermarket_foldernames = ['paknsave', 'countdown', 'mightyape', 'thewarehou
 var paths = []
 
 for (var supermarketname of supermarket_foldernames) {
-var files = fs.readdirSync(`${theRootThing}${supermarketname}`)
+  console.log(supermarketname)
+var files = fs.readdirSync(`${theRootThing}${supermarketname}/archive`)
 //fs.readdir(`${theRootThing}${supermarketname}`, (err, files) => {
-  var fileNumToCheck = 6 //1 = the latest, 2 = the previous one, and so on
-  files.splice(-fileNumToCheck)
-  var previousCheckFile = files[files.length-1]
+  //console.log(files)
+  //var fileNumToCheck = 0 //1 = the latest, 2 = the previous one, and so on
+  //files.splice(-fileNumToCheck)
+  var previousCheckFile = files[files.length-2]
   var currentCheckFile = 'latest.json'
   paths.push({
   "shorthand": `${supermarketname} Earlier`,
-  "path": `${theRootThing}${supermarketname}/${previousCheckFile}`
+  "path": `${theRootThing}${supermarketname}/archive/${previousCheckFile}`
 })
 paths.push({
   "shorthand": `${supermarketname} Now`,
