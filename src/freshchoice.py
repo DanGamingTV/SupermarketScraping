@@ -50,15 +50,15 @@ async def getProductPrice(productId, storeId):
     scrapedData['productImageURL'] = str(scrapedData['productImageURL'][0]['src']) if scrapedData['productImageURL'] else ''
     scrapedData['productDescription'] = soup.find_all('div', {'class': "MoreInfo__Details"})
     scrapedData['productDescription'] = scrapedData['productDescription'][0].text.strip() if scrapedData['productDescription'] else ''
-    volume_detect = re.match("(.{1,})(\d{3,}ml)", scrapedData['productName'])
+    scrapedData['volume'] = re.match("(.{1,})(\d{3,}ml)", scrapedData['productName'])
     price = {'productData': {'name': scrapedData['productName'], 'productId': productId, 'productShopPage': baseurl,'productImageURL': scrapedData['productImageURL'], 'productDescription': scrapedData['productDescription']},  'bestPrice': scrapedData['salePrice'] ,'price': scrapedData['salePrice']}
     pricePerLitre = soup.find_all('span', {'class': 'MoreInfo__UnitPricing'})
     if (pricePerLitre and re.match(config['regex']['pricePerLitre'], pricePerLitre[0].text)):
         pricePerLitre = re.match(config['regex']['pricePerLitre'], pricePerLitre[0].text)[1]
         price['pricePerLitre'] = float(pricePerLitre)*10
         price['bestPricePerLitre'] = float(pricePerLitre)*10
-    if (volume_detect):
-        price['productData']['volume'] = volume_detect.groups()[1]
+    if (scrapedData['volume']):
+        price['productData']['volume'] = scrapedData['volume'].groups()[1]
     if ('volume' in price['productData']):
         mutatedVolume = float(price['productData']['volume'].replace('ml', ''))
         actualVolume = float(mutatedVolume)
