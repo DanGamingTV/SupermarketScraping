@@ -2,7 +2,7 @@ const express = require('express');
 const serveIndex = require('serve-index');
 const app = express();
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.send(`Current endpoints:<br>/paknsave<br>/newworld<br>/countdown<br>/thewarehouse<br>/freshchoice<br>/supervalue<br>/mightyape<br>/data_changes<br><br>Example usage: GET /paknsave/latest.json<br>Returns: JSON price data`)
 })
 app.use('/paknsave', express.static(__dirname + '/data/paknsave'), serveIndex(__dirname + '/data/paknsave'))

@@ -1,156 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
-    <style>
-        th, td {
-  padding: 3px !important;
-}
-thead > tr {
-    display: revert!important;
-}
-
-/* Sortable tables */
-table thead {
-    background-color: #333;
-    color: #cccccc;
-    font-weight: bold;
-    cursor: default;
-}
-thead > tr > td {
-  font-size: 100%;
-  position: sticky;
-  top: 0; /* Don't forget this, required for the stickiness */
-  background-color: #333;
-}
-* {
-    font-family: sans-serif;
-}
-.green {
-    background-color: green;
-}
-.blue {
-    background-color: blue;
-}
-
-    </style>
-</head>
-<body>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-    <table id="table">
-
-    </table>
-      <script>
-          function objectTo2D(obj) {
-              var arr = [];
-              for (var i = 0; i < Object.keys(obj).length; i++) {
-                arr.push(obj[Object.keys(obj)[i]]);
-              };
-              return arr;
-          }
-          function arrayTo2D(arr) {
-              //console.log(arr)
-              var arr2 = [];
-              arr2.push(Object.keys(arr[0]))
-              for (var i = 0; i < arr.length; i++) {
-                  arr2.push(objectTo2D(arr[i]))
-              }
-              return arr2;
-          }
-          var data = [];
-          var storesToCheck = ['paknsave', 'countdown', 'mightyape', 'thewarehouse', 'freshchoice', 'supervalue']
-          var itemsProcessed = 0;
-            storesToCheck.forEach(st => {
-                fetch(`/${st}/latest.json`).then(response => response.json()).then(d => {
-                    console.log(d)
-                data = [...data, ...d]
-                itemsProcessed++;
-    if(itemsProcessed === storesToCheck.length) {
-      callback();
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+  <style>
+    th,
+    td {
+      padding: 3px !important;
     }
-            });
-            })
 
-          function callback() {
-          //console.log('hi test')
-          
-              //console.log(data)
-              var array = []
-              var numPushed = 0;
-              var numIterated = 0;
-              for (entry of data.slice(1)) {
-                // if (entry.productData.multipack) {
-                //     console.log(entry.productData.multipack)
-                //     if (entry.productData.multipack.quantity.length == 0) {
-                //         console.log("length is equal to 0")
-                //         delete entry.productData.multipack
-                //     }
-                // }
-                if (!entry.priceData.bestPricePerLitre) {
-                    entry.priceData.bestPricePerLitre = 0
-                    entry.priceData.pricePerLitre = 0
+    thead>tr {
+      display: revert !important;
+    }
 
-                }
-                if (entry.priceData.multiBuy) {
-                    var mb = entry.priceData.multiBuy;
-                    delete entry.priceData.multiBuy;
-                    entry.priceData = {...entry.priceData, ...mb}
-                } else {
-                    var mb = {'perUnit': entry.priceData.bestPrice, 'quantity': 1, 'value': entry.priceData.bestPrice}
-                    entry.priceData = {...entry.priceData, ...mb}
-                }
-                if ((entry.priceData.bestPrice) > 0) {
-                    //console.log(entry.priceData.quantity)
-                    array.push({'name': entry.productData.name, 'volume': entry.productData.volume ? entry.productData.volume : '?', ...entry.priceData, 'productShopPage': entry.productData.productShopPage, 'store': entry.store ? entry.store.name : ''})
-                    numPushed++;
-                    //console.log(`numPushed: ${numPushed}`)
-                }
-                numIterated++;
-                //console.log(`numIterated: ${numIterated}`)
-              }
-              array = arrayTo2D(array)
-          var table = document.getElementById("table");
-          //var columnStyles = ['nothing', 'nothing', 'green', 'green', 'blue', 'blue', 'nothing', 'nothing', 'nothing', 'nothing', 'nothing']
-          for(var i = 0; i < array.length; i++)
-           {
-               // create a new row
-               var newRow = table.insertRow(table.length);
-               for(var j = 0; j < array[i].length; j++)
-               {
-                   // create a new cell
-                   var cell = newRow.insertCell(j);
-                   
-                   // add value to the cell
-                   cell.innerHTML = array[i][j];
-                   // console.log(`style to add: ${columnStyles[j]}`)
-                   // cell.classList.add(columnStyles[j]);
-                   // console.log(`i: ${j}, inner: ${cell.innerHTML}`)
-               }
-           }
-           sorttable.makeSortable(table)
-        }
-        function myFunction() {
-  var input, filter, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+    /* Sortable tables */
+    table thead {
+      background-color: #333;
+      color: #cccccc;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    thead>tr>td {
+      font-size: 100%;
+      position: sticky;
+      top: 0;
+      /* Don't forget this, required for the stickiness */
+      background-color: #333;
+    }
+
+    * {
+      font-family: sans-serif;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <table id="table">
+
+  </table>
+  <script>
+    function objectTo2D(obj) {
+      var arr = [];
+      for (var i = 0; i < Object.keys(obj).length; i++) {
+        arr.push(obj[Object.keys(obj)[i]]);
+      };
+      return arr;
+    }
+
+    function arrayTo2D(arr) {
+      var arr2 = [];
+      arr2.push(Object.keys(arr[0]))
+      for (var i = 0; i < arr.length; i++) {
+        arr2.push(objectTo2D(arr[i]))
       }
-    }       
-  }
-}
-          
-        </script>
+      return arr2;
+    }
+    var data = [];
+    var storesToCheck = ['paknsave', 'countdown', 'mightyape', 'thewarehouse', 'freshchoice', 'supervalue']
+    var itemsProcessed = 0;
+    storesToCheck.forEach(st => {
+      fetch(`/${st}/latest.json`).then(response => response.json()).then(d => {
+        console.log(d)
+        data = [...data, ...d]
+        itemsProcessed++;
+        if (itemsProcessed === storesToCheck.length) {
+          callback();
+        }
+      });
+    })
+
+    function callback() {
+      var array = []
+      var numPushed = 0;
+      var numIterated = 0;
+      for (entry of data.slice(1)) {
+        if (!entry.priceData.bestPricePerLitre) {
+          entry.priceData.bestPricePerLitre = 0
+          entry.priceData.pricePerLitre = 0
+
+        }
+        if (entry.priceData.multiBuy) {
+          var mb = entry.priceData.multiBuy;
+          delete entry.priceData.multiBuy;
+          entry.priceData = {
+            ...entry.priceData,
+            ...mb
+          }
+        } else {
+          var mb = {
+            'perUnit': entry.priceData.bestPrice,
+            'quantity': 1,
+            'value': entry.priceData.bestPrice
+          }
+          entry.priceData = {
+            ...entry.priceData,
+            ...mb
+          }
+        }
+        if ((entry.priceData.bestPrice) > 0) {
+          array.push({
+            'name': entry.productData.name,
+            'volume': entry.productData.volume ? entry.productData.volume : '?',
+            ...entry.priceData,
+            'productShopPage': entry.productData.productShopPage,
+            'store': entry.store ? entry.store.name : ''
+          })
+          numPushed++;
+        }
+        numIterated++;
+      }
+      array = arrayTo2D(array)
+      var table = document.getElementById("table");
+      for (var i = 0; i < array.length; i++) {
+        // create a new row
+        var newRow = table.insertRow(table.length);
+        for (var j = 0; j < array[i].length; j++) {
+          // create a new cell
+          var cell = newRow.insertCell(j);
+          // add value to the cell
+          cell.innerHTML = array[i][j];
+        }
+      }
+      sorttable.makeSortable(table)
+    }
+
+    function myFunction() {
+      var input, filter, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
 </body>
+
 </html>

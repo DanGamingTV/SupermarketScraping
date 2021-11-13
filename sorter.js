@@ -11,11 +11,11 @@ for (var path of paths) {
   jsonData = jsonData.concat(JSON.parse(rawdata))
 }
 
-function compare( a, b ) {
-  if ( a.bestPricePerLitre < b.bestPricePerLitre ){
+function compare(a, b) {
+  if (a.bestPricePerLitre < b.bestPricePerLitre) {
     return -1;
   }
-  if ( a.bestPricePerLitre > b.bestPricePerLitre ){
+  if (a.bestPricePerLitre > b.bestPricePerLitre) {
     return 1;
   }
   return 0;
@@ -25,14 +25,13 @@ var newArray = [];
 
 for (var price of jsonData) {
   if (price.priceData.bestPricePerLitre && (price.productData.name.toLowerCase()).includes('mother')) {
-  //var price = {'productData': {'name': price_old['productData']['name']}, 'priceData': price_old['priceData']}
-  var tempOb = price.priceData
-  tempOb['name'] = price.productData.name
-  tempOb['productShopPage'] = price.productData.productShopPage
-  if (price.store) {
-    tempOb['store'] = price.store.name
-  }
-  newArray.push(tempOb)
+    var tempOb = price.priceData
+    tempOb['name'] = price.productData.name
+    tempOb['productShopPage'] = price.productData.productShopPage
+    if (price.store) {
+      tempOb['store'] = price.store.name
+    }
+    newArray.push(tempOb)
   }
 }
 
