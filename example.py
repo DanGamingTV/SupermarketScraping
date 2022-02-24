@@ -112,8 +112,8 @@ async def main():
             await scrapePriceData(supermarketscraper.mightyape, data_jsonfilething['mightyape'])
             print(
                 f"Mighty Ape ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-            # await scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
-            # print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            await scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
+            print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             await scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
             print(
                 f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
