@@ -73,6 +73,10 @@ async def getProductPrice(productId):
             actualVolume = float(mutatedVolume)*1000
             price['productData']['volume'] = actualVolume
         if ('volume' in price['productData']):
+            if ('mutatedVolume' not in globals()):
+                mutatedVolume = price['productData']['volume']
+                mutatedVolume = float(str(mutatedVolume).replace('ml', ''))
+                print(mutatedVolume)
             if ('multipack' in price['productData']):
                 actualVolume = mutatedVolume * \
                     int(price['productData']['multipack']['quantity'])
