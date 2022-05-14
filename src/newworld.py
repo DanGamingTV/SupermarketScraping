@@ -23,6 +23,7 @@ def getStoreIDs():
 
 
 def getStores():
+    print('getting newworld stores')
     stores_list = []
     with requests.session() as s:
         r = s.get(

@@ -9,7 +9,7 @@ var paths = []
 for (var supermarketname of supermarket_foldernames) {
   console.log(supermarketname)
   var files = fs.readdirSync(`${theRootThing}${supermarketname}/archive`)
-  var previousCheckFile = files[files.length - 2]
+  var previousCheckFile = files[files.length - 4]
   var currentCheckFile = 'latest.json'
   paths.push({
     "shorthand": `${supermarketname} Earlier`,
@@ -21,15 +21,18 @@ for (var supermarketname of supermarket_foldernames) {
   })
 }
 
+console.log(paths)
+
 var rawData;
 var jsonData = {};
 
 var objectsPushed = {}
 
 for (var path of paths) {
-  rawdata = fs.readFileSync(path.path);
-  var tempData = JSON.parse(rawdata)
+  rawData = fs.readFileSync(path.path);
+  var tempData = JSON.parse(rawData)
   for (var key of tempData.slice(1)) {
+    console.log('hi')
     var objectToPush = {
       'fileMeta': path,
       'entry': key

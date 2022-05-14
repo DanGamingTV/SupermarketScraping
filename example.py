@@ -5,8 +5,9 @@ import os.path
 import datetime
 import asyncio
 
-stores = {'freshchoice': supermarketscraper.freshchoice.getStores(), 'newworld': supermarketscraper.newworld.getStores(
-), 'paknsave': supermarketscraper.paknsave.getStores(), 'supervalue': supermarketscraper.supervalue.getStores()}
+print('et')
+
+stores = {'freshchoice': supermarketscraper.freshchoice.getStores(), 'newworld': [], 'paknsave': [], 'supervalue': supermarketscraper.supervalue.getStores()}
 
 globalTotalTimeCodeStarted = time.time()
 
@@ -24,6 +25,7 @@ def getTimeSpentRunning():
 
 
 async def scrapePriceData(api, productsToCheck, stores_stuff=None):
+    print('start scrapePriceData')
     dataList = []
     friendlyStoreName = api.config['siteMeta']['name'].replace(" ", "").lower()
     dataList.append({
@@ -45,7 +47,9 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
     })
     if (stores_stuff):
         async def per_store1(x_store):
+            print("run per_store1")
             async def per_product1(a_product):
+                print('run per_product1')
                 startTime = float(time.time())
                 currentPrice = await api.getProductPrice(a_product, x_store['id'])
                 storeModified = {'id': x_store['id'], 'name': x_store['name']}
@@ -64,6 +68,7 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
         await asyncio.gather(*coros_per_store1)
     else:
         async def per_product2(a_product):
+            print('run per_product2')
             startTime = float(time.time())
             currentPrice = await api.getProductPrice(a_product)
             productData = currentPrice['productData']
@@ -102,10 +107,12 @@ async def scrapePriceData(api, productsToCheck, stores_stuff=None):
 
 
 async def main():
+    print('start main')
     with open('./productsToCheck.json') as json_file:
         data_jsonfilething = json.load(json_file)
         with open('./storesToCheck.json') as stores_fi:
             stores_file = json.load(stores_fi)
+            print('await tw')
             await scrapePriceData(supermarketscraper.thewarehouse, data_jsonfilething['thewarehouse'])
             print(
                 f"The Warehouse ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
@@ -114,9 +121,9 @@ async def main():
                 f"Mighty Ape ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             await scrapePriceData(supermarketscraper.countdown, data_jsonfilething['countdown'])
             print(f"Countdown ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
-            await scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
-            print(
-                f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
+            #await scrapePriceData(supermarketscraper.paknsave, data_jsonfilething['paknsave'], stores_file['paknsave'])
+            #print(
+            #    f"Paknsave ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
             await scrapePriceData(supermarketscraper.freshchoice, data_jsonfilething['freshchoice'], stores['freshchoice'])
             print(
                 f"Fresh Choice ran for: {getTimeSpentRunning()} seconds ({getTimeSpentRunning()/60} minutes, {getTimeSpentRunning()/60/60} hours")
