@@ -39,6 +39,7 @@ async def getProductPrice(productId):
         multipack_detect = re.match(
             "(.{1,})(\d{3,}ml).(\d{1,}) Pack", productName)
         volume_detect = re.match("(.{1,})(\d{3,}ml)", productName)
+        volume_litre_detect = re.match("(.{1,})(\d{1,}\s{0,}[L-l])", productName)
         if (len(dollarsprice) > 0):
             if (len(centsprice) > 0):
                 salePrice = f"{dollarsprice[0]}.{centsprice[0]}"
@@ -61,10 +62,21 @@ async def getProductPrice(productId):
             price['productData']['volume'] = multipack_detect.groups()[1]
         elif (volume_detect):
             price['productData']['volume'] = volume_detect.groups()[1]
-        if ('volume' in price['productData']):
             mutatedVolume = float(
                 price['productData']['volume'].replace('ml', ''))
             actualVolume = float(mutatedVolume)
+            price['productData']['volume'] = actualVolume
+        elif (volume_litre_detect):
+            mutatedVolume = volume_litre_detect.groups()[1]
+            mutatedVolume = mutatedVolume.replace('L', '')
+            mutatedVolume = mutatedVolume.replace('l', '')
+            actualVolume = float(mutatedVolume)*1000
+            price['productData']['volume'] = actualVolume
+        if ('volume' in price['productData']):
+            if ('mutatedVolume' not in globals()):
+                mutatedVolume = price['productData']['volume']
+                mutatedVolume = float(str(mutatedVolume).replace('ml', ''))
+                print(mutatedVolume)
             if ('multipack' in price['productData']):
                 actualVolume = mutatedVolume * \
                     int(price['productData']['multipack']['quantity'])

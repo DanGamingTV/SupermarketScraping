@@ -18,6 +18,7 @@ def getStoreIDs():
     return storeIDs
 
 def getStores():
+    print('getting freshchoice stores')
     stores_list = []
     storeIDsIterated = []
     r = requests.get(config['endpoints']['storeList'])

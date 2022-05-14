@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup as bs
 import re
 import json
 import asyncio
+import nest_asyncio
+nest_asyncio.apply()
+# loop = asyncio.get_event_loop()
 
 config = {'siteMeta': {'name': 'countdown', 'mainURL': 'shop.countdown.co.nz'}, 'regex': {
     'multiPack': "(\d{1,})pk", 'packageType': "(.{1,}ml) cans", 'volumeSize': "(.{1,}ml)", 'productNameVolume': ". (\d{1,}ml)"}}
@@ -11,8 +14,17 @@ config = {'siteMeta': {'name': 'countdown', 'mainURL': 'shop.countdown.co.nz'}, 
 async def getProductPrice(productId):
     baseurl = f"https://{config['siteMeta']['mainURL']}/api/v1/products/{productId}"
     header = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
-        "X-Requested-With": "OnlineShopping.WebApp"
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Content-Type": "application/json",
+    "X-Requested-With": "OnlineShopping.WebApp",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+    "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin"
     }
 
     with requests.session() as s:

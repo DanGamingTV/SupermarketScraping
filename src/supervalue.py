@@ -23,6 +23,7 @@ def getStoreIDs():
 
 
 def getStores():
+    print('getting supervalue stores')
     stores_list = []
     storeIDsIterated = []
     r = requests.get(config['endpoints']['storeList'])
